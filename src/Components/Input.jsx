@@ -1,45 +1,35 @@
-import React, { Component } from "react";
-import propTypes from "prop-types";
-import classNames from "classnames";
+import React, { useState } from "react";
 
-export default class Input extends Component {
-  static propTypes = {
-    onSave: propTypes.func.isRequired,
-    text: propTypes.string,
-    placeholder: propTypes.string,
-    editing: propTypes.bool,
-    newTodo: propTypes.bool,
-  };
+//  Id d'enregistrement
+let id = 0;
 
-  state = {
-    text: this.props.text || "",
-  };
+const Input = ({onSave}) => {
+  const [todo, setTodo] = useState("");
+  const [stateTodo, setStateTodo] = useState(false);
 
-  handleSubmit = (e) => {
-    const text = e.target.value.trim();
+  //   Recuperation des données envoyées
+  const handleSubmit = (e) => {
     if (e.which === 13) {
-      this.props.onSave(text);
+      const Data = {
+        id,
+        todo,
+        stateTodo
+      };
+      onSave(Data);
+      id++;
     }
   };
 
-  handleChange = (e) => {
-    this.setState({ text: e.target.value });
-  };
+  return (
+    <input
+      type="text"
+      className="new-todo"
+      onChange={(e) => setTodo(e.target.value)}
+      onKeyDown={handleSubmit}
+      value={todo}
+      placeholder="Que voulez-vous faire?"
+    />
+  );
+};
 
-
-  render() {
-    return (
-      <input
-        className={classNames({
-          edit: this.props.editing,
-          "new-todo": this.props.newTodo,
-        })}
-        type="text"
-        placeholder={this.props.placeholder}
-        value={this.state.text}
-        onChange={this.handleChange}
-        onKeyDown={this.handleSubmit}
-      />
-    );
-  }
-}
+export default Input;
