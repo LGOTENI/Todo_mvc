@@ -1,13 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useSelector } from "react-redux"
 import filters from "../utils/filters"
 
 export default function Footer({ todos, onFilter, activeFilter, onDeleteAll }) {
+
+  const todosData = useSelector(state => state.todo.todos)
 
   const handleClick = (e, filter) => {
     e.preventDefault()
     onFilter(filter)
   }
-  const leftCount = todos.filter(item => !item.checked).length
+  //const leftCount = todos.filter(item => !item.checked).length
+  const leftCount = todosData.filter(item => !item.checked).length
 
   return (
     <footer className="footer">
