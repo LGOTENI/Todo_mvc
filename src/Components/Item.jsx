@@ -1,19 +1,19 @@
 import { useCallback, useState } from "react"
+import { useDispatch } from "react-redux";
+// import {} from "../store/todoReducer"
+import { edit, remove, toogle } from "../store/todoReducer";
 
-function View({ data, onToggle, onDelete, onEdit }) {
 
-  const handleDelete = (todo) => {
-    onDelete(todo)
-  }
+
+function View({ data, onEdit }) {
+
+  const dispatch = useDispatch();
 
   const handleChange = () => {
-    onToggle(data)
+    dispatch(toogle(data))
   }
-
   return (
-    <li
-      onDoubleClick={onEdit}
-      className={`${data.checked ? "completed" : ""}`}>
+    <li onDoubleClick={onEdit} className={`${data.checked ? "completed" : ""}`}>
       <div className="view">
         <input
           type="checkbox"
@@ -23,14 +23,16 @@ function View({ data, onToggle, onDelete, onEdit }) {
           autoFocus={true}
         />
         <label>{data.todo}</label>
-        <button className="destroy" onClick={() => handleDelete(data)} />
+        <button className="destroy" onClick={() => dispatch(remove(data))} />
       </div>
     </li>
-  )
+  );
 }
 
 function Form({ data, closeEdit, onEdit }) {
   const [value, setValue] = useState(data.todo)
+  const dispatch = useDispatch();
+
 
   const handleChange = (e) => {
     setValue(e.target.value)
@@ -44,7 +46,9 @@ function Form({ data, closeEdit, onEdit }) {
   const handleSubmit = (e) => {
     if (e.which === 13) {
       closeEdit()
-      onEdit(data.id, value)
+      // onEdit(data, value)
+      dispatch(edit({data, value}));
+
     }
   }
 
@@ -62,7 +66,7 @@ function Form({ data, closeEdit, onEdit }) {
   )
 }
 
-const Item = ({ data, onToggle, onDelete, onEdit }) => {
+const Item = ({data,onEdit }) => {
 
   const [editing, setEditing] = useState(false)
 
@@ -80,7 +84,7 @@ const Item = ({ data, onToggle, onDelete, onEdit }) => {
       closeEdit={handleCloseEdit}
       onEdit={onEdit}
     />) : (
-      <View data={data} onToggle={onToggle} onDelete={onDelete} onEdit={handleEdit} />
+      <View data={data} onEdit={handleEdit} />
     )
   )
 }

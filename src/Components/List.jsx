@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux";
 import Item from "./Item";
 
-export default function List({ todos, onEdit, ...rest }) {
+export default function List() {
+  
   const todoData = useSelector(state => state.todo.todos)
-
-  console.log(todoData)
   
   return (
     <ul className="todo-list">
@@ -12,8 +11,6 @@ export default function List({ todos, onEdit, ...rest }) {
         <Item
           key={data.id}
           data={data}
-          onEdit={onEdit}
-          {...rest}
         />
       ))}
     </ul>

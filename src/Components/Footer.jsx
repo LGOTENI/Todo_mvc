@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useSelector } from "react-redux"
 import filters from "../utils/filters"
-
-export default function Footer({ todos, onFilter, activeFilter, onDeleteAll }) {
+export default function Footer({ onFilter, activeFilter, onDeleteAll }) {
 
   const todosData = useSelector(state => state.todo.todos)
-
+  
   const handleClick = (e, filter) => {
     e.preventDefault()
     onFilter(filter)
@@ -27,7 +26,7 @@ export default function Footer({ todos, onFilter, activeFilter, onDeleteAll }) {
           ))
         }
       </ul>
-      {leftCount === 0 && todos.length > 0 && <button className="clear-completed" onClick={onDeleteAll}>Clear completed</button>}
+      {leftCount === 0 && todosData.length > 0 && <button className="clear-completed" onClick={onDeleteAll}>Clear completed</button>}
     </footer>
   )
 }

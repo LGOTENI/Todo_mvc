@@ -5,8 +5,7 @@ import { addTodo } from "../store/todoReducer"
 //  Id d'enregistrement
 let id = 0;
 
-
-const Input = ({onSave}) => {
+const Input = () => {
   const [todo, setTodo] = useState("");
 
   const dispatch = useDispatch()
@@ -21,11 +20,7 @@ const Input = ({onSave}) => {
       }
 
       dispatch(addTodo(data))
-
-
-      //onSave(data);
-      setTodo('')
-    }
+      setTodo('')    }
 
   };
 
