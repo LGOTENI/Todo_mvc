@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "react-app",
-    "airbnb"
-  ],
+  "extends": ["react-app", "airbnb"],
   "rules": {
     "no-const-assign": "warn",
     "no-this-before-super": "warn",
@@ -24,14 +21,8 @@
     "react/jsx-filename-extension": "off",
     "react/jsx-props-no-spreading": "off",
     "object-curly-newline": "off",
-    "quotes": [
-      2,
-      "double"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ],
+    "quotes": [2, "double"],
+    "semi": ["error", "never"],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off"
   }

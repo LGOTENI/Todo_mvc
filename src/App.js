@@ -1,41 +1,40 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import Footer from "./components/Footer";
-import Input from "./components/Input";
-import List from "./components/List";
-import { selectAll } from "./store/todoReducer";
+import React, { useCallback, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import Footer from "./components/Footer"
+import Input from "./components/Input"
+import List from "./components/List"
+import { selectAll } from "./store/todoReducer"
 
-import { FILTER_ALL, FILTER_ACTIVE, FILTER_COMPLETED } from "./utils/filters";
+import { FILTER_ALL, FILTER_ACTIVE, FILTER_COMPLETED } from "./utils/filters"
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   // const [todos, setTodos] = useState([]);
-  const [todosToDisplay, setTodoToDisplay] = useState([]);
-  const [activeFilter, setActiveFilter] = useState(FILTER_ALL);
+  const [todosToDisplay, setTodoToDisplay] = useState([])
+  const [activeFilter, setActiveFilter] = useState(FILTER_ALL)
 
-  const todoData = useSelector((state) => state.todo.todos);
+  const todoData = useSelector((state) => state.todo.todos)
 
   const applyFilter = useCallback(() => {
     if (activeFilter === FILTER_ALL) {
-      setTodoToDisplay([...todoData]);
+      setTodoToDisplay([...todoData])
     }
     if (activeFilter === FILTER_COMPLETED) {
-      setTodoToDisplay(todoData.filter((todo) => todo.checked === true));
+      setTodoToDisplay(todoData.filter((todo) => todo.checked === true))
     }
 
     if (activeFilter === FILTER_ACTIVE) {
-      setTodoToDisplay(todoData.filter((todo) => todo.checked === false));
+      setTodoToDisplay(todoData.filter((todo) => todo.checked === false))
     }
-  }, [todoData, activeFilter]);
+  }, [todoData, activeFilter])
 
   useEffect(() => {
-    applyFilter();
-  }, [activeFilter, applyFilter]);
+    applyFilter()
+  }, [activeFilter, applyFilter])
 
   const handleFilter = useCallback((filter) => {
-    setActiveFilter(filter);
-  }, []);
+    setActiveFilter(filter)
+  }, [])
 
   return (
     <div className="todoapp">
@@ -53,7 +52,7 @@ function App() {
               className="toggle-all"
               onChange={() => dispatch(selectAll())}
             />
-            <label htmlFor="toggle-all"></label>
+            <label htmlFor="toggle-all">H</label>
           </span>
         )}
 
@@ -68,6 +67,6 @@ function App() {
         />
       )}
     </div>
-  );
+  )
 }
-export default App;
+export default App

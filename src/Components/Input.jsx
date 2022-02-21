@@ -1,28 +1,26 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react"
+import { useDispatch } from "react-redux"
 import { addTodo } from "../store/todoReducer"
 
-//  Id d'enregistrement
-let id = 0;
+let id = 0
 
-const Input = () => {
-  const [todo, setTodo] = useState("");
-
+function Input() {
+  const [todo, setTodo] = useState("")
   const dispatch = useDispatch()
 
-  // Recuperation des données envoyées
   const handleSubmit = (e) => {
     if (e.which === 13) {
       const data = {
-        id: ++id,
-        todo: todo,
+        // eslint-disable-next-line no-plusplus
+        id: id++,
+        todo,
         checked: false,
       }
 
       dispatch(addTodo(data))
-      setTodo('')
+      setTodo("")
     }
-  };
+  }
 
   return (
     <input
@@ -33,7 +31,7 @@ const Input = () => {
       value={todo}
       placeholder="Que voulez-vous faire?"
     />
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

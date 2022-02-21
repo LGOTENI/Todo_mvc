@@ -1,48 +1,40 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+/* eslint-disable no-param-reassign */
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   todos: [],
-};
+}
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
     add: ({ todos }, payload) => {
-      todos.push(payload.payload);
+      todos.push(payload.payload)
     },
     edit: (state, payload) => {
       const index = state.todos.findIndex(
         (todo) => todo.id === payload.payload.data.id
-      );
-      state.todos[index].todo = payload.payload.value;
+      )
+      state.todos[index].todo = payload.payload.value
     },
     remove: (state, payload) => {
       state.todos = state.todos.filter(
         (todo) => todo.id !== payload.payload.id
-      );
+      )
     },
     toogle: (state, payload) => {
       const index = state.todos.findIndex(
         (todo) => todo.id === payload.payload.id
-      );
-      state.todos[index].checked = !payload.payload.checked;
-    },
-   /*  selectAll: (state, payload) => {
-      // console.log(true)
-    },
-    selectActive: (state, payload) => {
-      console.log('active', true)
-      state.todos= state.todos.filter(
-        (todoActive) => todoActive.checked=false
       )
-    }, */
-    deleteAll: (state, payloada) => {
-      const maSuperConstante = state.todos.length;
-      state.todos.splice(0, maSuperConstante);
+      const table = state.todos
+      table[index].checked = !payload.payload.checked
+    },
+    deleteAll: (state) => {
+      const maSuperConstante = state.todos.length
+      state.todos.splice(0, maSuperConstante)
     },
   },
-});
+})
 
 export const {
   add: addTodo,
@@ -52,5 +44,5 @@ export const {
   selectAll,
   deleteAll, 
   selectActive
-} = todoSlice.actions;
-export default todoSlice.reducer;
+} = todoSlice.actions
+export default todoSlice.reducer
