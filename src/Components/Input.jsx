@@ -20,8 +20,8 @@ const Input = () => {
       }
 
       dispatch(addTodo(data))
-      setTodo('')    }
-
+      setTodo('')
+    }
   };
 
   return (
@@ -35,6 +35,5 @@ const Input = () => {
     />
   );
 };
-
 
 export default Input;

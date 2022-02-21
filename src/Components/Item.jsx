@@ -1,17 +1,14 @@
 import { useCallback, useState } from "react"
 import { useDispatch } from "react-redux";
-// import {} from "../store/todoReducer"
 import { edit, remove, toogle } from "../store/todoReducer";
 
-
-
 function View({ data, onEdit }) {
-
   const dispatch = useDispatch();
 
   const handleChange = () => {
     dispatch(toogle(data))
   }
+
   return (
     <li onDoubleClick={onEdit} className={`${data.checked ? "completed" : ""}`}>
       <div className="view">
@@ -29,10 +26,9 @@ function View({ data, onEdit }) {
   );
 }
 
-function Form({ data, closeEdit, onEdit }) {
+function Form({ data, closeEdit }) {
   const [value, setValue] = useState(data.todo)
   const dispatch = useDispatch();
-
 
   const handleChange = (e) => {
     setValue(e.target.value)
@@ -40,15 +36,13 @@ function Form({ data, closeEdit, onEdit }) {
 
   const handleBlur = () => {
     closeEdit()
-    onEdit(data.id, value)
+    dispatch(edit({ data, value }));
   }
 
   const handleSubmit = (e) => {
     if (e.which === 13) {
       closeEdit()
-      // onEdit(data, value)
-      dispatch(edit({data, value}));
-
+      dispatch(edit({ data, value }));
     }
   }
 
@@ -66,8 +60,7 @@ function Form({ data, closeEdit, onEdit }) {
   )
 }
 
-const Item = ({data,onEdit }) => {
-
+const Item = ({ data }) => {
   const [editing, setEditing] = useState(false)
 
   const handleEdit = useCallback(() => {
@@ -82,7 +75,6 @@ const Item = ({data,onEdit }) => {
     editing ? (<Form
       data={data}
       closeEdit={handleCloseEdit}
-      onEdit={onEdit}
     />) : (
       <View data={data} onEdit={handleEdit} />
     )

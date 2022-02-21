@@ -1,6 +1,6 @@
 import Item from "./Item";
 
-export default function List({onData}) {
+export default function List({ onData }) {
   return (
     <ul className="todo-list">
       {onData.map((data) => (

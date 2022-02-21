@@ -1,0 +1,38 @@
+{
+  "extends": [
+    "react-app",
+    "airbnb"
+  ],
+  "rules": {
+    "no-const-assign": "warn",
+    "no-this-before-super": "warn",
+    "no-undef": "warn",
+    "no-continue": "off",
+    "no-unreachable": "warn",
+    "no-unused-vars": "warn",
+    "constructor-super": "warn",
+    "valid-typeof": "warn",
+    "linebreak-style": "off",
+    "no-console": "off",
+    "react/forbid-prop-types": "off",
+    "jsx-a11y/alt-text": "off",
+    "no-trailing-spaces": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "comma-dangle": "off",
+    "react/state-in-constructor": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-props-no-spreading": "off",
+    "object-curly-newline": "off",
+    "quotes": [
+      2,
+      "double"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  }
+}
