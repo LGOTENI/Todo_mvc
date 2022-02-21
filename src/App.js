@@ -1,65 +1,74 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Footer from "./components/Footer";
 import Input from "./components/Input";
 import List from "./components/List";
+import { selectActive, selectAll } from "./store/todoReducer";
+
 import { FILTER_ALL, FILTER_ACTIVE, FILTER_COMPLETED } from "./utils/filters";
 
 function App() {
-  const todoData = useSelector((state) => state.todo.todos);
-
-  const [todos, setTodos] = useState([]);
+  const dispatch = useDispatch();
+  // const [todos, setTodos] = useState([]);
   const [todosToDisplay, setTodoToDisplay] = useState([]);
   const [activeFilter, setActiveFilter] = useState(FILTER_ACTIVE);
+  
+  const todoData = useSelector((state) => state.todo.todos);
 
   const applyFilter = useCallback(() => {
     if (activeFilter === FILTER_ALL) {
-      setTodoToDisplay([...todos]);
+       setTodoToDisplay([...todoData]);
     }
     if (activeFilter === FILTER_COMPLETED) {
-      setTodoToDisplay(todos.filter((todo) => todo.checked === true));
+       setTodoToDisplay(todoData.filter((todo) => todo.checked === true));
     }
 
     if (activeFilter === FILTER_ACTIVE) {
-      setTodoToDisplay(todos.filter((todo) => todo.checked === false));
+       setTodoToDisplay(todoData.filter((todo) => todo.checked === false));
     }
-  }, [todos, activeFilter]);
+  }, [todoData, activeFilter]);
 
   useEffect(() => {
     applyFilter();
-  }, [todos, activeFilter, applyFilter]);
+  }, [activeFilter, applyFilter]);
 
   const handleFilter = useCallback((filter) => {
     setActiveFilter(filter);
   }, []);
 
-  const handleDeleteAll = useCallback(() => {
+ /*  const handleDeleteAll = useCallback(() => {
     setTodos([]);
-  }, []);
+  }, []); */
 
   return (
     <div className="todoapp">
       {/* Ddebut header Todo */}
       <header className="header">
         <h1>My todo</h1>
-        <Input/>
+        <Input />
       </header>
       <section className="main">
         {todoData.length > 0 && (
           <span>
-            <input type="checkbox" id="toggle-all" className="toggle-all" />
+            <input
+              type="checkbox"
+              id="toggle-all"
+              className="toggle-all"
+              onChange={() => dispatch(selectAll())}
+            />
             <label htmlFor="toggle-all"></label>
           </span>
         )}
 
-        <List/>
+        <List onData={todosToDisplay} />
       </section>
 
       {todoData.length > 0 && (
         <Footer
           onFilter={handleFilter}
           activeFilter={activeFilter}
-          onDeleteAll={handleDeleteAll}
+          // onDeleteAll={handleDeleteAll}
         />
       )}
     </div>

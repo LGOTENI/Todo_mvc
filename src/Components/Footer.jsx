@@ -1,15 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useSelector } from "react-redux"
+import  {useDispatch} from "react-redux"
+import { deleteAll } from "../store/todoReducer"
 import filters from "../utils/filters"
-export default function Footer({ onFilter, activeFilter, onDeleteAll }) {
+export default function Footer({onFilter, activeFilter}) {
 
+  const dispatch= useDispatch()
   const todosData = useSelector(state => state.todo.todos)
-  
+
   const handleClick = (e, filter) => {
     e.preventDefault()
     onFilter(filter)
   }
-  //const leftCount = todos.filter(item => !item.checked).length
   const leftCount = todosData.filter(item => !item.checked).length
 
   return (
@@ -26,7 +28,7 @@ export default function Footer({ onFilter, activeFilter, onDeleteAll }) {
           ))
         }
       </ul>
-      {leftCount === 0 && todosData.length > 0 && <button className="clear-completed" onClick={onDeleteAll}>Clear completed</button>}
+      {leftCount === 0 && todosData.length > 0 && <button className="clear-completed" onClick={()=> dispatch(deleteAll())}>Clear completed</button>}
     </footer>
   )
 }
