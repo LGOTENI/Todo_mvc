@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Footer from "./components/Footer";
 import Input from "./components/Input";
 import List from "./components/List";
-import { selectActive, selectAll } from "./store/todoReducer";
+import { selectAll } from "./store/todoReducer";
 
 import { FILTER_ALL, FILTER_ACTIVE, FILTER_COMPLETED } from "./utils/filters";
 
@@ -12,20 +12,20 @@ function App() {
   const dispatch = useDispatch();
   // const [todos, setTodos] = useState([]);
   const [todosToDisplay, setTodoToDisplay] = useState([]);
-  const [activeFilter, setActiveFilter] = useState(FILTER_ACTIVE);
-  
+  const [activeFilter, setActiveFilter] = useState(FILTER_ALL);
+
   const todoData = useSelector((state) => state.todo.todos);
 
   const applyFilter = useCallback(() => {
     if (activeFilter === FILTER_ALL) {
-       setTodoToDisplay([...todoData]);
+      setTodoToDisplay([...todoData]);
     }
     if (activeFilter === FILTER_COMPLETED) {
-       setTodoToDisplay(todoData.filter((todo) => todo.checked === true));
+      setTodoToDisplay(todoData.filter((todo) => todo.checked === true));
     }
 
     if (activeFilter === FILTER_ACTIVE) {
-       setTodoToDisplay(todoData.filter((todo) => todo.checked === false));
+      setTodoToDisplay(todoData.filter((todo) => todo.checked === false));
     }
   }, [todoData, activeFilter]);
 
@@ -36,10 +36,6 @@ function App() {
   const handleFilter = useCallback((filter) => {
     setActiveFilter(filter);
   }, []);
-
- /*  const handleDeleteAll = useCallback(() => {
-    setTodos([]);
-  }, []); */
 
   return (
     <div className="todoapp">
@@ -68,7 +64,7 @@ function App() {
         <Footer
           onFilter={handleFilter}
           activeFilter={activeFilter}
-          // onDeleteAll={handleDeleteAll}
+        // onDeleteAll={handleDeleteAll}
         />
       )}
     </div>

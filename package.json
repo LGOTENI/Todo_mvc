@@ -2,6 +2,20 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint",
+      "git add"
+    ],
+    "*.{html,css,less,ejs}": [
+      "git add"
+    ]
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",
     "react": "^17.0.2",
@@ -13,6 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint src --ext .js --ext .jsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -33,5 +48,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-react-app": "^7.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.4"
   }
 }
