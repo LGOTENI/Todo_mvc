@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useState } from "react";
 
 
 const initialState = {
@@ -29,7 +28,7 @@ export const todoSlice = createSlice({
       );
       state.todos[index].checked = !payload.payload.checked;
     },
-    selectAll: (state, payload) => {
+   /*  selectAll: (state, payload) => {
       // console.log(true)
     },
     selectActive: (state, payload) => {
@@ -37,7 +36,7 @@ export const todoSlice = createSlice({
       state.todos= state.todos.filter(
         (todoActive) => todoActive.checked=false
       )
-    },
+    }, */
     deleteAll: (state, payloada) => {
       const maSuperConstante = state.todos.length;
       state.todos.splice(0, maSuperConstante);
