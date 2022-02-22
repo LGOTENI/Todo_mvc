@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Footer from "./components/Footer"
 import Input from "./components/Input"
