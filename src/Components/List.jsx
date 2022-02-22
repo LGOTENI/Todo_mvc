@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux"
 import Item from "./Item"
 
-export default function List({ onData }) {
+export default function List() {
+  const todoData = useSelector((state) => state.todo.filter)
   return (
     <ul className="todo-list">
-      {onData.map((data) => (
+      {todoData.map((data) => (
         <Item
           key={data.id}
           data={data}

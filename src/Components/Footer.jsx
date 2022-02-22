@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useSelector, useDispatch } from "react-redux"
-import { deleteAll } from "../store/todoReducer"
+import { deleteAll, filterTodo } from "../store/todoReducer"
 import filters from "../utils/filters"
 
-export default function Footer({ onFilter, activeFilter }) {
+export default function Footer({ activeFilter, onFilter }) {
   const dispatch = useDispatch()
-  const todosData = useSelector((state) => state.todo.todos)
+  const todosData = useSelector((state) => state.todo.filter)
   const leftCount = useSelector(
     ({ todo: { todos } }) => todos.filter((item) => !item.checked).length
   )
@@ -13,8 +13,8 @@ export default function Footer({ onFilter, activeFilter }) {
   const handleClick = (e, filter) => {
     e.preventDefault()
     onFilter(filter)
+    dispatch(filterTodo(filter))
   }
-  
   return (
     <footer className="footer">
       <span className="todo-count">
